@@ -21,7 +21,7 @@ class GermanAnalyzer:
 
     async def analyze(self, text: str) -> AnalyzeResponse:
         response = self.client.models.generate_content(
-            model="gemini-2.5-flash-lite",
+            model="gemini-2.5-flash",
             config=types.GenerateContentConfig(
                 system_instruction=ANALYSIS_SYSTEM_PROMPT,
                 response_mime_type="application/json",

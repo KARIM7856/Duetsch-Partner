@@ -15,14 +15,52 @@ export const villageGame: GameConfig = {
       sprite: { kind: "emoji", value: "👨‍🍳" },
       position: { x: 20, y: 90 },
       interaction: {
-        type: "dialogue",
-        lines: [
-          { speaker: "Der Bäcker", text: "Guten Morgen! Möchten Sie Brot kaufen?" },
-          { speaker: "Du", text: "Ja, bitte. Wie viel kostet das Brot?" },
-          { speaker: "Der Bäcker", text: "Das Brot kostet zwei Euro." },
-          { speaker: "Du", text: "Hier sind zwei Euro. Danke schön!" },
-          { speaker: "Der Bäcker", text: "Bitte schön! Auf Wiedersehen!" },
-        ],
+        type: "minigame",
+        componentName: "DialogueBuilder",
+        config: {
+          lines: [
+            {
+              speaker: "Der Bäcker",
+              parts: [
+                { type: "text", value: "Guten " },
+                { type: "blank", answer: "Morgen", hint: "morning" },
+                { type: "text", value: "! Möchten Sie Brot kaufen?" },
+              ],
+            },
+            {
+              speaker: "Du",
+              parts: [
+                { type: "text", value: "Ja, bitte. Wie viel " },
+                { type: "blank", answer: "kostet", hint: "costs" },
+                { type: "text", value: " das Brot?" },
+              ],
+            },
+            {
+              speaker: "Der Bäcker",
+              parts: [
+                { type: "text", value: "Das Brot kostet " },
+                { type: "blank", answer: "zwei", hint: "two" },
+                { type: "text", value: " Euro." },
+              ],
+            },
+            {
+              speaker: "Du",
+              parts: [
+                { type: "text", value: "Hier sind zwei Euro. Danke " },
+                { type: "blank", answer: "schön", hint: "nicely" },
+                { type: "text", value: "!" },
+              ],
+            },
+            {
+              speaker: "Der Bäcker",
+              parts: [
+                { type: "text", value: "Bitte schön! Auf " },
+                { type: "blank", answer: "Wiedersehen", hint: "goodbye" },
+                { type: "text", value: "!" },
+              ],
+            },
+          ],
+        },
       },
     },
     {

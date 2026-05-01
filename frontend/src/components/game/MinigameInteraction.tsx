@@ -1,6 +1,7 @@
 "use client";
 
 import type { InteractionConfig } from "@/lib/games/types";
+import { DialogueBuilder } from "./minigames/DialogueBuilder";
 
 type MinigameConfig = Extract<InteractionConfig, { type: "minigame" }>;
 
@@ -12,7 +13,7 @@ const MINIGAME_REGISTRY: Record<
   string,
   React.ComponentType<{ config: Record<string, unknown> }>
 > = {
-  // VocabularyQuiz: VocabularyQuiz,
+  DialogueBuilder,
 };
 
 interface MinigameInteractionProps {
