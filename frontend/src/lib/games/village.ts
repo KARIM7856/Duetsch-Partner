@@ -14,6 +14,7 @@ export const villageGame: GameConfig = {
       name: "Der Bäcker",
       sprite: { kind: "emoji", value: "👨‍🍳" },
       position: { x: 20, y: 90 },
+      award: "baker-talked",
       interaction: {
         type: "minigame",
         componentName: "DialogueBuilder",
@@ -84,6 +85,7 @@ export const villageGame: GameConfig = {
       name: "Das Kind",
       sprite: { kind: "emoji", value: "🧒" },
       position: { x: 75, y: 65 },
+      requires: ["baker-talked"],
       interaction: {
         type: "dialogue",
         lines: [

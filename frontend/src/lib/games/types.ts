@@ -18,6 +18,10 @@ export interface CharacterConfig {
   /** Percentage-based position on the board (0–100 for both axes) */
   position: { x: number; y: number };
   interaction: InteractionConfig;
+  /** Award IDs the player must have earned before this interaction unlocks. */
+  requires?: string[];
+  /** Award ID granted when the player completes this interaction. */
+  award?: string;
 }
 
 export interface GameConfig {

@@ -11,16 +11,22 @@ type MinigameConfig = Extract<InteractionConfig, { type: "minigame" }>;
  */
 const MINIGAME_REGISTRY: Record<
   string,
-  React.ComponentType<{ config: Record<string, unknown> }>
+  React.ComponentType<{
+    config: Record<string, unknown>;
+    onComplete?: () => void;
+    onAward?: () => void;
+  }>
 > = {
   DialogueBuilder,
 };
 
 interface MinigameInteractionProps {
   config: MinigameConfig;
+  onComplete: () => void;
+  onAward: () => void;
 }
 
-export function MinigameInteraction({ config }: MinigameInteractionProps) {
+export function MinigameInteraction({ config, onComplete, onAward }: MinigameInteractionProps) {
   const Component = MINIGAME_REGISTRY[config.componentName];
 
   if (!Component) {
@@ -36,5 +42,5 @@ export function MinigameInteraction({ config }: MinigameInteractionProps) {
     );
   }
 
-  return <Component config={config.config} />;
+  return <Component config={config.config} onComplete={onComplete} onAward={onAward} />;
 }

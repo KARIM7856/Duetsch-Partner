@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import type { GameConfig, CharacterConfig } from "@/lib/games/types";
 import { CharacterSprite } from "./CharacterSprite";
@@ -10,8 +10,73 @@ interface GameBoardProps {
   config: GameConfig;
 }
 
+const storageKey = (gameId: string) => `deutschflow:awards:${gameId}`;
+
+function loadAwards(key: string): Set<string> {
+  try {
+    const raw = window.localStorage.getItem(key) ?? "";
+    if (!raw) return new Set();
+    const parsed: unknown = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      return new Set(parsed.filter((v): v is string => typeof v === "string"));
+    }
+  } catch {
+    // ignore parse / privacy-mode failures
+  }
+  return new Set();
+}
+
+function persistAwards(key: string, awards: Set<string>) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(Array.from(awards)));
+  } catch {
+    // ignore quota / privacy-mode failures
+  }
+}
+
 export function GameBoard({ config }: GameBoardProps) {
   const [activeCharacter, setActiveCharacter] = useState<CharacterConfig | null>(null);
+  const key = storageKey(config.id);
+
+  const [awards, setAwards] = useState<Set<string>>(() => loadAwards(key));
+
+  const grantAward = useCallback(
+    (id: string) => {
+      setAwards((prev) => {
+        if (prev.has(id)) return prev;
+        const next = new Set(prev);
+        next.add(id);
+        persistAwards(key, next);
+        return next;
+      });
+    },
+    [key],
+  );
+
+  const awardOwners = useMemo(() => {
+    const map = new Map<string, string>();
+    config.characters.forEach((c) => {
+      if (c.award) map.set(c.award, c.name);
+    });
+    return map;
+  }, [config.characters]);
+
+  const unmetFor = useCallback(
+    (character: CharacterConfig): string[] =>
+      (character.requires ?? [])
+        .filter((req) => !awards.has(req))
+        .map((req) => awardOwners.get(req) ?? req),
+    [awards, awardOwners],
+  );
+
+  const handleAward = useCallback(() => {
+    if (activeCharacter?.award) grantAward(activeCharacter.award);
+  }, [activeCharacter, grantAward]);
+
+  const handleComplete = useCallback(() => {
+    if (activeCharacter?.award) grantAward(activeCharacter.award);
+    setActiveCharacter(null);
+  }, [activeCharacter, grantAward]);
 
   return (
     <>
@@ -29,6 +94,7 @@ export function GameBoard({ config }: GameBoardProps) {
           <CharacterSprite
             key={character.id}
             character={character}
+            locked={unmetFor(character).length > 0}
             onClick={() => setActiveCharacter(character)}
           />
         ))}
@@ -38,7 +104,10 @@ export function GameBoard({ config }: GameBoardProps) {
         {activeCharacter && (
           <InteractionModal
             character={activeCharacter}
+            lockedBy={unmetFor(activeCharacter)}
             onClose={() => setActiveCharacter(null)}
+            onComplete={handleComplete}
+            onAward={handleAward}
           />
         )}
       </AnimatePresence>

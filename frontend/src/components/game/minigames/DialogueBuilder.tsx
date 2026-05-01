@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Reorder, motion, AnimatePresence } from "framer-motion";
 
 type DialoguePart =
@@ -20,6 +20,8 @@ type Result = "idle" | "correct" | "incorrect";
 
 interface DialogueBuilderProps {
   config: Record<string, unknown>;
+  onComplete?: () => void;
+  onAward?: () => void;
 }
 
 function shuffleIndices(n: number): number[] {
@@ -38,7 +40,7 @@ function normalize(s: string) {
   return s.trim().toLowerCase();
 }
 
-export function DialogueBuilder({ config }: DialogueBuilderProps) {
+export function DialogueBuilder({ config, onComplete, onAward }: DialogueBuilderProps) {
   const { lines } = config as unknown as DialogueBuilderConfig;
 
   const [currentOrder, setCurrentOrder] = useState<number[]>(() =>
@@ -46,6 +48,10 @@ export function DialogueBuilder({ config }: DialogueBuilderProps) {
   );
   const [inputs, setInputs] = useState<Record<string, string>>({});
   const [result, setResult] = useState<Result>("idle");
+
+  useEffect(() => {
+    if (result === "correct") onAward?.();
+  }, [result, onAward]);
 
   const blankKeys = useMemo(() => {
     const keys: { lineIdx: number; partIdx: number; answer: string }[] = [];
@@ -201,13 +207,19 @@ export function DialogueBuilder({ config }: DialogueBuilderProps) {
         >
           Noch einmal versuchen
         </button>
+      ) : result === "correct" ? (
+        <button
+          onClick={() => onComplete?.()}
+          className="w-full py-2.5 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors text-sm"
+        >
+          Fertig
+        </button>
       ) : (
         <button
           onClick={handleCheck}
-          disabled={result === "correct"}
-          className="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full py-2.5 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors text-sm"
         >
-          {result === "correct" ? "Fertig" : "Prüfen"}
+          Prüfen
         </button>
       )}
     </div>
