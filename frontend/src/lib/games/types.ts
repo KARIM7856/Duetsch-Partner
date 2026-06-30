@@ -33,3 +33,9 @@ export interface GameConfig {
   };
   characters: CharacterConfig[];
 }
+
+/** A linear sequence of scenes the player progresses through. */
+export interface SceneGameConfig {
+  id: string;
+  scenes: GameConfig[];
+}

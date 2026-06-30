@@ -11,10 +11,9 @@ DeutschFlow is a full-stack platform designed to bridge the gap between A1 Germa
 
 ## Tech Stack
 
-- **Frontend:** Next.js (TypeScript), Tailwind CSS, Framer Motion
-- **Backend:** FastAPI (Python 3.11+), PostgreSQL (SQLAlchemy)
-- **AI/ML:** OpenAI Whisper (ASR), Gemini 1.5 Flash (Analysis)
-- **Real-time:** LiveKit (WebRTC), WebSockets
+- **App:** Next.js (TypeScript, App Router) — frontend and API routes in a single deployable
+- **Database:** PostgreSQL (for upcoming users / history / achievements)
+- **AI/ML:** OpenAI Whisper (ASR), Gemini 2.5 Flash (Analysis)
 - **Infra:** Docker, Docker Compose
 
 ## Getting Started
@@ -23,7 +22,6 @@ DeutschFlow is a full-stack platform designed to bridge the gap between A1 Germa
 
 - Docker & Docker Compose
 - Node.js 20+ (for local frontend dev)
-- Python 3.11+ (for local backend dev)
 
 ### Setup
 
@@ -47,23 +45,17 @@ DeutschFlow is a full-stack platform designed to bridge the gap between A1 Germa
 
 ### Local Development (without Docker)
 
-**Backend:**
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate  # or .venv\Scripts\activate on Windows
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
-**Frontend:**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
+Set `GEMINI_API_KEY` and `OPENAI_API_KEY` in either the project-root `.env` (read by `docker-compose`) or `frontend/.env.local` (read by `next dev`).
+
 ## API Endpoints
 
-- `POST /api/analyze` - Analyze German text for grammar errors
-- `POST /api/transcribe` - Transcribe audio and analyze the result
+Served by Next.js route handlers under `frontend/src/app/api/`:
+
+- `POST /api/analyze` — analyze German text for grammar errors
+- `POST /api/transcribe` — transcribe audio and analyze the result

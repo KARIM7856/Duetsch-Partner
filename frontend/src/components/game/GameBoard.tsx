@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import type { GameConfig, CharacterConfig } from "@/lib/games/types";
 import { CharacterSprite } from "./CharacterSprite";
@@ -8,6 +8,7 @@ import { InteractionModal } from "./InteractionModal";
 
 interface GameBoardProps {
   config: GameConfig;
+  onAwardGranted?: () => void;
 }
 
 const storageKey = (gameId: string) => `deutschflow:awards:${gameId}`;
@@ -34,11 +35,15 @@ function persistAwards(key: string, awards: Set<string>) {
   }
 }
 
-export function GameBoard({ config }: GameBoardProps) {
+export function GameBoard({ config, onAwardGranted }: GameBoardProps) {
   const [activeCharacter, setActiveCharacter] = useState<CharacterConfig | null>(null);
   const key = storageKey(config.id);
 
-  const [awards, setAwards] = useState<Set<string>>(() => loadAwards(key));
+  const [awards, setAwards] = useState<Set<string>>(() => new Set());
+
+  useEffect(() => {
+    setAwards(loadAwards(key));
+  }, [key]);
 
   const grantAward = useCallback(
     (id: string) => {
@@ -46,11 +51,15 @@ export function GameBoard({ config }: GameBoardProps) {
         if (prev.has(id)) return prev;
         const next = new Set(prev);
         next.add(id);
-        persistAwards(key, next);
         return next;
       });
+      // Write to localStorage immediately (outside React's render cycle)
+      const current = loadAwards(key);
+      current.add(id);
+      persistAwards(key, current);
+      onAwardGranted?.();
     },
-    [key],
+    [key, onAwardGranted],
   );
 
   const awardOwners = useMemo(() => {
