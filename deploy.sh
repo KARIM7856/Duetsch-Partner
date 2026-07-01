@@ -64,7 +64,7 @@ if [ "${SYNC_ENV:-}" = "1" ]; then
     fi
   done
 fi
-
+#
 # 3. Deploy. Vercel builds remotely; the URL is printed on success.
 target=(--prod)
 [ "${PREVIEW:-}" = "1" ] && target=()
