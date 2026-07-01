@@ -38,3 +38,7 @@ postgres_data/
 
 # Docker
 docker-compose.override.yml
+
+# Vercel
+.vercel
+.env*
