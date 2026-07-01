@@ -1,3 +1,5 @@
+import type { PuppeTurnRequest, PuppeTurnResult } from "./puppe-types";
+
 export interface WordAnalysis {
   word: string;
   is_correct: boolean;
@@ -44,6 +46,20 @@ export async function transcribeAudio(
   });
   if (!res.ok) {
     throw new Error(`Transcription failed: ${res.statusText}`);
+  }
+  return res.json();
+}
+
+export async function playPuppeTurn(
+  req: PuppeTurnRequest,
+): Promise<PuppeTurnResult> {
+  const res = await fetch(`${API_BASE}/puppe`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  if (!res.ok) {
+    throw new Error(`Turn failed: ${res.statusText}`);
   }
   return res.json();
 }

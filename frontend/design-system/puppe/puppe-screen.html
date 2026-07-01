@@ -1,0 +1,72 @@
+<!-- @dsCard group="meine Puppe" name="Game screen" subtitle="Full layout: header, controls, hints, chat, input" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeutschFlow — meine Puppe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body { font-family: Arial, Helvetica, sans-serif; } </style>
+</head>
+<body class="bg-slate-50 text-slate-900 p-8">
+  <div class="w-full max-w-2xl mx-auto">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold text-slate-900">meine Puppe 🧸</h1>
+      <p class="text-slate-500 mt-2">Ich denke an ein deutsches Wort (A1/A2). Stell mir Fragen auf Deutsch und rate, welches Nomen es ist!</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <!-- Control bar -->
+      <div class="flex flex-wrap items-center gap-2 p-3 border-b border-slate-200 bg-slate-50">
+        <button class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-900 text-white hover:bg-slate-800">Neues Spiel</button>
+        <button class="px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-200">Aufgeben</button>
+        <div class="ml-auto flex items-center gap-3 text-xs text-slate-500">
+          <span>Versuche: <strong class="text-slate-700">3</strong></span>
+          <span class="hidden sm:inline">Wärmste Vermutung: <strong class="text-slate-700">64%</strong></span>
+        </div>
+      </div>
+
+      <!-- Hints -->
+      <div class="flex flex-wrap items-center gap-2 px-3 py-2 border-b border-slate-100 text-xs">
+        <span class="text-slate-400 font-medium">Tipps:</span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">Artikel: <strong>die</strong></span>
+        <button class="px-2.5 py-1 rounded-full border border-dashed border-slate-300 text-slate-500 hover:bg-slate-50">Kategorie zeigen</button>
+        <button class="px-2.5 py-1 rounded-full border border-dashed border-slate-300 text-slate-500 hover:bg-slate-50">Buchstaben zeigen</button>
+      </div>
+
+      <!-- Chat area -->
+      <div class="h-[22rem] overflow-y-auto px-4 py-4 space-y-3 bg-white">
+        <div class="flex justify-end">
+          <div class="max-w-[80%] px-4 py-2.5 text-sm leading-relaxed bg-slate-900 text-white rounded-2xl rounded-br-sm">Ist es ein Tier?</div>
+        </div>
+        <div class="flex justify-start">
+          <div class="max-w-[80%] px-4 py-2.5 text-sm leading-relaxed bg-slate-100 text-slate-800 rounded-2xl rounded-bl-sm">Ja, es ist ein Tier! 🐾</div>
+        </div>
+        <div class="flex justify-end">
+          <div class="max-w-[80%] px-4 py-2.5 text-sm leading-relaxed bg-slate-900 text-white rounded-2xl rounded-br-sm">Ist es eine Katze?</div>
+        </div>
+        <div class="flex justify-start">
+          <div class="max-w-[80%]">
+            <div class="px-4 py-2.5 text-sm leading-relaxed bg-slate-100 text-slate-800 rounded-2xl rounded-bl-sm">Nein, aber du wirst wärmer! ♨️</div>
+            <div class="mt-1.5 space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border bg-orange-100 text-orange-700 border-orange-300">♨️ Heiß</span>
+                <span class="text-xs text-slate-400">„Katze" · 64%</span>
+              </div>
+              <div class="h-1.5 w-40 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-orange-500" style="width:64%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <form class="flex items-center gap-2 p-3 border-t border-slate-200 bg-white">
+        <input class="flex-1 px-4 py-2.5 border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-slate-300 text-slate-900 placeholder:text-slate-400" placeholder="Frag auf Deutsch oder rate ein Nomen…" />
+        <button type="button" class="px-5 py-2.5 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800">Senden</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

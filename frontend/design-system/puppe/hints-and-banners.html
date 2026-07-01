@@ -1,0 +1,53 @@
+<!-- @dsCard group="meine Puppe" name="Hints, banners & controls" subtitle="Hint chips, win / give-up / error banners, control buttons" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeutschFlow — Hints &amp; banners</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body { font-family: Arial, Helvetica, sans-serif; } </style>
+</head>
+<body class="bg-slate-50 text-slate-900 p-8">
+  <div class="w-full max-w-2xl mx-auto space-y-6">
+
+    <!-- Controls -->
+    <section>
+      <h2 class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Controls</h2>
+      <div class="flex flex-wrap items-center gap-2">
+        <button class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-900 text-white hover:bg-slate-800">Neues Spiel</button>
+        <button class="px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-200">Aufgeben</button>
+        <button class="px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 cursor-not-allowed" disabled>Aufgeben (disabled)</button>
+      </div>
+    </section>
+
+    <!-- Hint chips -->
+    <section>
+      <h2 class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Hint chips — unrevealed vs revealed</h2>
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="text-slate-400 font-medium">Tipps:</span>
+        <button class="px-2.5 py-1 rounded-full border border-dashed border-slate-300 text-slate-500 hover:bg-slate-50">Artikel zeigen</button>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">Kategorie: <strong>Tiere</strong></span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">Buchstaben: <strong>4</strong></span>
+      </div>
+    </section>
+
+    <!-- Banners -->
+    <section class="space-y-3">
+      <h2 class="text-xs font-semibold uppercase tracking-wide text-slate-500">Banners</h2>
+
+      <div class="px-4 py-3 border-t border-green-200 bg-green-50 text-green-800 text-sm rounded-lg">
+        🎉 <strong>Richtig!</strong> Das Wort war <strong>der Hund</strong> (dog) — Plural: die Hunde.
+      </div>
+
+      <div class="px-4 py-3 border-t border-amber-200 bg-amber-50 text-amber-800 text-sm rounded-lg">
+        Das gesuchte Wort war <strong>die Puppe</strong> (doll). Versuch es noch einmal!
+      </div>
+
+      <div class="px-4 py-2 bg-red-50 border-t border-red-200 text-red-700 text-sm rounded-lg">
+        Etwas ist schiefgelaufen. Bitte versuche es erneut.
+      </div>
+    </section>
+  </div>
+</body>
+</html>

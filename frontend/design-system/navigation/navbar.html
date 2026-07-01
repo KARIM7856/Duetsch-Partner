@@ -1,0 +1,39 @@
+<!-- @dsCard group="Navigation" name="Top navigation bar" subtitle="Brand + tab pills · active and inactive states" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeutschFlow — Navigation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body { font-family: Arial, Helvetica, sans-serif; } </style>
+</head>
+<body class="bg-slate-50 text-slate-900 p-8">
+  <div class="max-w-4xl mx-auto space-y-6">
+    <header>
+      <h1 class="text-2xl font-bold">Top navigation bar</h1>
+      <p class="text-slate-500 text-sm mt-1">Sticky bar with brand and three tab pills. The active tab is filled slate-900.</p>
+    </header>
+
+    <!-- Grammar active -->
+    <nav class="w-full border border-slate-200 rounded-xl bg-white/80 backdrop-blur-sm">
+      <div class="px-4 flex items-center h-12 gap-1">
+        <span class="font-bold text-slate-900 mr-4 text-sm">DeutschFlow</span>
+        <a class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-900 text-white">Grammar</a>
+        <a class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">Game Mode</a>
+        <a class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">meine Puppe</a>
+      </div>
+    </nav>
+
+    <!-- meine Puppe active -->
+    <nav class="w-full border border-slate-200 rounded-xl bg-white/80 backdrop-blur-sm">
+      <div class="px-4 flex items-center h-12 gap-1">
+        <span class="font-bold text-slate-900 mr-4 text-sm">DeutschFlow</span>
+        <a class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">Grammar</a>
+        <a class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">Game Mode</a>
+        <a class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-900 text-white">meine Puppe</a>
+      </div>
+    </nav>
+  </div>
+</body>
+</html>

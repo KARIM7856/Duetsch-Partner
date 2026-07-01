@@ -1,0 +1,49 @@
+<!-- @dsCard group="meine Puppe" name="Chat bubbles" subtitle="User, AI, example-question chips, typing indicator" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeutschFlow — Chat bubbles</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body { font-family: Arial, Helvetica, sans-serif; } </style>
+</head>
+<body class="bg-slate-50 text-slate-900 p-8">
+  <div class="w-full max-w-md mx-auto space-y-6">
+
+    <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+      <h2 class="text-xs font-semibold uppercase tracking-wide text-slate-500">Bubbles</h2>
+      <div class="flex justify-end">
+        <div class="max-w-[80%] px-4 py-2.5 text-sm leading-relaxed bg-slate-900 text-white rounded-2xl rounded-br-sm">Kann man es essen?</div>
+      </div>
+      <div class="flex justify-start">
+        <div class="max-w-[80%] px-4 py-2.5 text-sm leading-relaxed bg-slate-100 text-slate-800 rounded-2xl rounded-bl-sm">Nein, essen kann man es nicht. Aber man findet es oft im Kinderzimmer! 🙂</div>
+      </div>
+      <!-- typing -->
+      <div class="flex justify-start">
+        <div class="bg-slate-100 rounded-2xl rounded-bl-sm px-4 py-3">
+          <div class="flex gap-1">
+            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+            <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white border border-slate-200 rounded-xl p-4">
+      <h2 class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Empty state — example questions</h2>
+      <div class="text-center text-slate-400 text-sm">
+        <p class="mb-3">Frag mich zum Beispiel:</p>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-100">Ist es ein Tier?</button>
+          <button class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-100">Kann man es essen?</button>
+          <button class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-100">Ist es groß?</button>
+          <button class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-100">Findet man es im Haus?</button>
+          <button class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-100">Ist es lebendig?</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
