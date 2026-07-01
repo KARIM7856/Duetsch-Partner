@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useAnalysis } from "@/hooks/useAnalysis";
 import { CorrectedTranscript } from "@/components/CorrectedTranscript";
 import { AudioRecorder } from "@/components/AudioRecorder";
-
+//
 type Tab = "type" | "speak";
 
 export default function Home() {
